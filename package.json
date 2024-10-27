@@ -1,0 +1,46 @@
+{
+  "name": "advanced-discord-bot",
+  "version": "1.0.0",
+  "description": "An advanced beginner friendly discord bot with an optimized command handler and a dashboard!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "devMode": "nodemon index.js",
+    "lint": "eslint .",
+    "format": "prettier --write \"**/*.js\"",
+    "update": "npm update"  
+  },
+  "repository": {
+    "type": "git",
+    "url": "."
+  },
+  "keywords": [
+    "discord",
+    "discord.js",
+    "ejs",
+    "express.js",
+    "dashboard",
+    "handler",
+    "commands"
+  ],
+  "author": "AmineDev07",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "discord.js": "^14.12.1",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "express-session": "^1.18.1",
+    "fs": "^0.0.1-security",
+    "mongoose": "^8.7.3",
+    "passport": "^0.7.0",
+    "passport-discord": "^0.1.4"
+  },
+  "devDependencies": {
+    "eslint": "^9.13.0",
+    "nodemon": "^3.1.7",
+    "prettier": "^3.3.3"
+  }
+}

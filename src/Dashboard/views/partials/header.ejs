@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title || "Dashboard" %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="profile">
+            <img src="<%= user.avatar ? `https://cdn.discordapp.com/avatars/${user.discordId}/${user.avatar}.png` : 'https://static.vecteezy.com/system/resources/previews/023/741/066/non_2x/discord-logo-icon-social-media-icon-free-png.png' %>" alt="User Avatar" class="profile-pic">
+            <span>Welcome, <%= user.username %></span>
+        </div>
+        <nav>
+            <ul class="nav-list">
+                <li><a href="/">Home</a></li>
+                <% if (user) { %>
+                    <li><a href="/auth/logout">Logout</a></li>
+                <% } else { %>
+                    <li><a href="/auth/login">Login</a></li>
+                <% } %>
+            </ul>
+        </nav>
+    </header>
+    <main>

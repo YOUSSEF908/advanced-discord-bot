@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <%- include('partials/header', { title: "Dashboard", user }) %>
+    <div class="container">
+        <h1>Your Servers</h1>
+        <ul class="guild-list">
+            <% guilds.forEach(guild => { %>
+                <li class="guild-item">
+                    <img src="<%= guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png` : 'https://static.vecteezy.com/system/resources/previews/023/741/066/non_2x/discord-logo-icon-social-media-icon-free-png.png' %>" alt="<%= guild.name %>" class="guild-icon">
+                    <span class="guild-name"><%= guild.name %></span>
+                </li>
+            <% }); %>
+        </ul>
+        
+    </div>
+    <%- include('partials/footer') %>
+</body>
+</html>
