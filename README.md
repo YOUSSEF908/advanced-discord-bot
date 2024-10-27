@@ -1,6 +1,6 @@
 # Advanced Discord Bot
 
-![Node.js](https://img.shields.io/badge/Node.js-v16.0.0-brightgreen) ![Discord.js](https://img.shields.io/badge/Discord.js-v14.12.1-blue) ![GitHub issues](https://img.shields.io/github/issues/AmineDev07/advanced-discord-bot) ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Node.js](https://img.shields.io/badge/Node.js-v16.0.0-brightgreen) ![Discord.js](https://img.shields.io/badge/Discord.js-v14.12.1-blue) ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 A beginner-friendly and customizable Discord bot built with Node.js and Discord.js. This bot features an advanced commands/events handler and a user-friendly dashboard.
 
