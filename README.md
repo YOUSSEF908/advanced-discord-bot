@@ -54,7 +54,7 @@ npm run devMode
 npm start
 ```
 5. **Adding callbackURL**:
-<img src="https://media.discordapp.net/attachments/1300075032453714052/1300211098016022670/image.png?ex=67200372&is=671eb1f2&hm=405c4bc327dc22aa9d739394a4aac18ea83097849743ec501cc5d3d0900896b8&=&format=webp&quality=lossless&width=1230&height=675">
+<img src="https://imgur.com/7yYPEWy">
 
 #### Dashboard : 
 > You should find the dashboard on http://localhost:3000 if you have not changed the port and if you did make sure to also change it on the Redirect section for the bot.
