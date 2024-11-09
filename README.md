@@ -8,7 +8,6 @@ A beginner-friendly and customizable Discord bot built with Node.js and Discord.
 
 - [Features](#features)
 - [Installation](#installation)
-- [Showcasing](#showcasing)
 
 ## Features
 
@@ -53,19 +52,9 @@ npm run devMode
 ```bash
 npm start
 ```
-5. **Adding callbackURL**:
-<img src="https://imgur.com/7yYPEWy">
 
 #### Dashboard : 
 > You should find the dashboard on http://localhost:3000 if you have not changed the port and if you did make sure to also change it on the Redirect section for the bot.
-
-## Showcasing 
-#### Ping Command: 
-<img src="https://media.discordapp.net/attachments/1300075032453714052/1300209975112503408/image.png?ex=67200266&is=671eb0e6&hm=c4003751926063edaf5933dcb1a75808329d80157929e272e0dffd84ce5e3c97&=&format=webp&quality=lossless&width=516&height=217">
-
-#### Dashboard : 
-<img src="https://media.discordapp.net/attachments/1300075032453714052/1300210038274523136/image.png?ex=67200275&is=671eb0f5&hm=e27add5b60dbad489e8b27d093a4fc600617c8d73bcedfd1a425edfaa51bdb98&=&format=webp&quality=lossless&width=1238&height=675">
-
 
 
 > If you reached to this point don't forget to 🌟 this project
