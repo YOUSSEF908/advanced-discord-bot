@@ -15,10 +15,12 @@
                 <li class="guild-item">
                     <img src="<%= guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png` : 'https://static.vecteezy.com/system/resources/previews/023/741/066/non_2x/discord-logo-icon-social-media-icon-free-png.png' %>" alt="<%= guild.name %>" class="guild-icon">
                     <span class="guild-name"><%= guild.name %></span>
+                    <a href="<%= guild.inviteURL %>" target="_blank">
+                        <button class="invite-button">Invite Bot to <%= guild.name %></button>
+                    </a>
                 </li>
             <% }); %>
         </ul>
-        
     </div>
     <%- include('partials/footer') %>
 </body>

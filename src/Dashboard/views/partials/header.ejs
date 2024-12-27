@@ -9,8 +9,8 @@
 <body>
     <header>
         <div class="profile">
-            <img src="<%= user.avatar ? `https://cdn.discordapp.com/avatars/${user.discordId}/${user.avatar}.png` : 'https://static.vecteezy.com/system/resources/previews/023/741/066/non_2x/discord-logo-icon-social-media-icon-free-png.png' %>" alt="User Avatar" class="profile-pic">
-            <span>Welcome, <%= user.username %></span>
+            <img src="https://cdn.discordapp.com/avatars/<%= user.discordId %>/<%= user.avatar %>.webp?dynamic=true" alt="User Avatar" class="profile-pic">
+            <span>Welcome, <%= user ? user.username : 'Guest' %></span>
         </div>
         <nav>
             <ul class="nav-list">

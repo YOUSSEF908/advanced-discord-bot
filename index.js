@@ -22,7 +22,7 @@ antiCrash(bot);
 
 require('./src/Structure/Handler/Event')(bot);
 require('./src/Structure/Handler/Command')(bot);
-require('./src/dashboard/server.js');
+require('./src/Dashboard/server.js');
 
 mongoose
   .connect(bot.config.mongoURI)

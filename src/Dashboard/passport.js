@@ -27,7 +27,12 @@ passport.use(
     async (accessToken, refreshToken, profile, done) => {
       try {
         const existingUser = await User.findOne({ discordId: profile.id });
+
         if (existingUser) {
+          if (existingUser.avatar !== profile.avatar) {
+            existingUser.avatar = profile.avatar;
+            await existingUser.save();
+          }
           return done(null, existingUser);
         }
 
@@ -35,6 +40,7 @@ passport.use(
           discordId: profile.id,
           username: profile.username,
           discriminator: profile.discriminator,
+          avatar: profile.avatar,
           accessToken,
         }).save();
 
@@ -45,18 +51,5 @@ passport.use(
     },
   ),
 );
-
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await User.findById(id);
-    done(null, user);
-  } catch (error) {
-    done(error);
-  }
-});
 
 module.exports = passport;
