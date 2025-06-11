@@ -3,24 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title || "Dashboard" %></title>
-    <link rel="stylesheet" href="/css/style.css">
+    <title><%= title || "Discord Bot Dashboard" %></title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
 </head>
 <body>
     <header>
-        <div class="profile">
-            <img src="https://cdn.discordapp.com/avatars/<%= user.discordId %>/<%= user.avatar %>.webp?dynamic=true" alt="User Avatar" class="profile-pic">
-            <span>Welcome, <%= user ? user.username : 'Guest' %></span>
+        <div class="header-brand">
+            <div class="brand-icon">🤖</div>
+            <span>Bot Dashboard</span>
         </div>
-        <nav>
-            <ul class="nav-list">
-                <li><a href="/">Home</a></li>
-                <% if (user) { %>
-                    <li><a href="/auth/logout">Logout</a></li>
-                <% } else { %>
-                    <li><a href="/auth/login">Login</a></li>
-                <% } %>
-            </ul>
-        </nav>
+        
+        <div class="profile">
+            <% if (user) { %>
+                <div class="profile-info">
+                    <img src="https://cdn.discordapp.com/avatars/<%= user.discordId %>/<%= user.avatar %>.webp?size=128" 
+                         alt="<%= user.username %>'s Avatar" 
+                         class="profile-pic"
+                         onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                    <div class="profile-details">
+                        <div class="profile-name"><%= user.username %></div>
+                        <div class="profile-status">Administrator</div>
+                    </div>
+                </div>
+            <% } %>
+            
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="/">Dashboard</a></li>
+                    <% if (user) { %>
+                        <li><a href="/auth/logout">Logout</a></li>
+                    <% } else { %>
+                        <li><a href="/auth/login">Login</a></li>
+                    <% } %>
+                </ul>
+            </nav>
+        </div>
     </header>
     <main>

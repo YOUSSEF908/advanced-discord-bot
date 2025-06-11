@@ -3,25 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Dashboard</title>
+    <title>Discord Bot Dashboard</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
 </head>
 <body>
-    <%- include('partials/header', { title: "Dashboard", user }) %>
+    <header>
+        <div class="header-brand">
+            <div class="brand-icon">🤖</div>
+            <span>Bot Dashboard</span>
+        </div>
+        
+        <div class="profile">
+            <div class="profile-info">
+                <img src="https://cdn.discordapp.com/avatars/<%= user.discordId %>/<%= user.avatar %>.webp?size=128" 
+                     alt="<%= user.username %>'s Avatar" 
+                     class="profile-pic"
+                     onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                <div class="profile-details">
+                    <div class="profile-name"><%= user.username %></div>
+                    <div class="profile-status">Administrator</div>
+                </div>
+            </div>
+            
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="/" class="active">Dashboard</a></li>
+                    <li><a href="/auth/logout">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
     <div class="container">
-        <h1>Your Servers</h1>
-        <ul class="guild-list">
-            <% guilds.forEach(guild => { %>
-                <li class="guild-item">
-                    <img src="<%= guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png` : 'https://static.vecteezy.com/system/resources/previews/023/741/066/non_2x/discord-logo-icon-social-media-icon-free-png.png' %>" alt="<%= guild.name %>" class="guild-icon">
-                    <span class="guild-name"><%= guild.name %></span>
-                    <a href="<%= guild.inviteURL %>" target="_blank">
-                        <button class="invite-button">Invite Bot to <%= guild.name %></button>
-                    </a>
-                </li>
-            <% }); %>
-        </ul>
+        <div class="page-header">
+            <h1 class="page-title">Your Discord Servers</h1>
+            <p class="page-subtitle">Manage your bot across all your Discord servers</p>
+        </div>
+
+        <% if (guilds && guilds.length > 0) { %>
+            <div class="guild-grid">
+                <% guilds.forEach(guild => { %>
+                    <div class="guild-card">
+                        <div class="guild-header">
+                            <img src="<%= guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=128` : 'https://cdn.discordapp.com/embed/avatars/0.png' %>" 
+                                 alt="<%= guild.name %> Icon" 
+                                 class="guild-icon"
+                                 onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                            <div class="guild-info">
+                                <h3 class="guild-name"><%= guild.name %></h3>
+                                <div class="guild-members">
+                                    <span>👥</span>
+                                    <span>Server ID: <%= guild.id %></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="guild-status not-connected">
+                            <div class="status-dot"></div>
+                            <span>Bot not connected</span>
+                        </div>
+                        
+                        <div style="margin-top: 1.5rem;">
+                            <a href="<%= guild.inviteURL %>" 
+                               target="_blank" 
+                               class="btn btn-primary"
+                               style="width: 100%;">
+                                <span>🚀</span>
+                                <span>Invite Bot to <%= guild.name %></span>
+                            </a>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <div class="empty-state">
+                <div class="empty-icon">🏰</div>
+                <h2 class="empty-title">No Servers Found</h2>
+                <p class="empty-description">
+                    You don't have administrator permissions on any Discord servers, 
+                    or you haven't joined any servers yet.
+                </p>
+                <a href="https://discord.com" target="_blank" class="btn btn-primary btn-large">
+                    <span>💬</span>
+                    <span>Go to Discord</span>
+                </a>
+            </div>
+        <% } %>
     </div>
-    <%- include('partials/footer') %>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://discord.com/developers/docs" target="_blank">Discord API</a>
+            <a href="https://github.com" target="_blank">GitHub</a>
+            <a href="https://discord.gg" target="_blank">Support Server</a>
+        </div>
+        <p>&copy; 2024 Made with ❤️ by AmineDev07</p>
+    </footer>
+
+    <script>
+        // Add some interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate cards on scroll
+            const cards = document.querySelectorAll('.guild-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+
+            // Add click feedback to buttons
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        width: ${size}px;
+                        height: ${size}px;
+                        left: ${x}px;
+                        top: ${y}px;
+                        background: rgba(255, 255, 255, 0.3);
+                        border-radius: 50%;
+                        transform: scale(0);
+                        animation: ripple 0.6s linear;
+                        pointer-events: none;
+                    `;
+                    
+                    this.appendChild(ripple);
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
+        });
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>
