@@ -33,7 +33,10 @@ if (bot.config.clientSecret && bot.config.clientSecret !== 'YOUR_CLIENT_SECRET_H
 // Connect to MongoDB if URI is provided
 if (bot.config.mongoURI && bot.config.mongoURI !== '') {
   mongoose
-    .connect(bot.config.mongoURI)
+    .connect(bot.config.mongoURI, {
+      serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
+      socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+    })
     .then(() => console.log('Connected to MongoDB'))
     .catch((err) => {
       console.error('MongoDB connection error:', err.message);
