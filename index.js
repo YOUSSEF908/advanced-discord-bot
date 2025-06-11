@@ -22,13 +22,36 @@ antiCrash(bot);
 
 require('./src/Structure/Handler/Event')(bot);
 require('./src/Structure/Handler/Command')(bot);
-require('./src/Dashboard/server.js');
 
-mongoose
-  .connect(bot.config.mongoURI)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch((err) => console.error('MongoDB connection error:', err));
+// Only start dashboard if we have the required config
+if (bot.config.clientSecret && bot.config.clientSecret !== '') {
+  require('./src/Dashboard/server.js');
+} else {
+  console.warn('Dashboard disabled: clientSecret not provided');
+}
 
-bot.login(bot.config.token);
+// Connect to MongoDB if URI is provided
+if (bot.config.mongoURI && bot.config.mongoURI !== '') {
+  mongoose
+    .connect(bot.config.mongoURI)
+    .then(() => console.log('Connected to MongoDB'))
+    .catch((err) => {
+      console.error('MongoDB connection error:', err.message);
+      console.log('Bot will continue without database features');
+    });
+} else {
+  console.warn('No MongoDB URI provided - database features disabled');
+}
+
+// Only login if token is provided
+if (bot.config.token && bot.config.token !== '') {
+  bot.login(bot.config.token).catch(err => {
+    console.error('Failed to login to Discord:', err.message);
+    console.log('Please check your bot token in the .env file');
+  });
+} else {
+  console.error('No bot token provided! Please add your token to the .env file');
+  process.exit(1);
+}
 
 module.exports = bot;

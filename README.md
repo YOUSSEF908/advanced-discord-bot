@@ -8,6 +8,7 @@ A beginner-friendly and customizable Discord bot built with Node.js and Discord.
 
 - [Features](#features)
 - [Installation](#installation)
+- [Configuration](#configuration)
 
 ## Features
 
@@ -22,39 +23,97 @@ A beginner-friendly and customizable Discord bot built with Node.js and Discord.
 
 - Node.js (version 16 or later)
 - Discord account and a Discord server to test the bot
+- MongoDB (optional, for database features)
 
 ### Steps
 
 1. **Clone the repository**:
 
 ```bash
-   git clone https://github.com/AmineDev07/advanced-discord-bot.git
-   cd advanced-discord-bot
+git clone https://github.com/AmineDev07/advanced-discord-bot.git
+cd advanced-discord-bot
 ```
+
 2. **Install dependencies**:
 
 ```bash
 npm install
 ```
-3. **Create a `.env` file**:
-```env
-token = "Your Bot's Token goes here"
-mongoURI = "Your mongodb URI goes here"
-clientSecret = "Your Bot's client secret goes here"
-```
+
+3. **Configure your bot**:
+   - Copy the `.env` file and fill in your bot's credentials
+   - Get your bot token from the [Discord Developer Portal](https://discord.com/developers/applications)
+   - If you want dashboard features, also get your client secret from the same portal
+
 4. **Run The Bot**:
 
-#### For developement mode with automatic restarts:
+#### For development mode with automatic restarts:
 ```bash
 npm run devMode
 ```
+
 #### For production:
 ```bash
 npm start
 ```
 
-#### Dashboard : 
-> You should find the dashboard on http://localhost:3000 if you have not changed the port and if you did make sure to also change it on the Redirect section for the bot.
+## Configuration
 
+### Required Environment Variables
 
-> If you reached to this point don't forget to 🌟 this project
+Create a `.env` file in the root directory with the following variables:
+
+```env
+# Required - Your Discord bot token
+token=YOUR_BOT_TOKEN_HERE
+
+# Optional - MongoDB connection string (for database features)
+mongoURI=mongodb://localhost:27017/discord-bot
+
+# Optional - Discord client secret (for dashboard authentication)
+clientSecret=YOUR_CLIENT_SECRET_HERE
+
+# Optional - Session secret for dashboard security
+SESSION_SECRET=your-random-secret-key
+```
+
+### Getting Your Bot Token
+
+1. Go to the [Discord Developer Portal](https://discord.com/developers/applications)
+2. Create a new application or select an existing one
+3. Go to the "Bot" section
+4. Copy the token and paste it in your `.env` file
+
+### Setting Up MongoDB (Optional)
+
+If you want to use database features like command cooldowns:
+
+1. Install MongoDB locally or use a cloud service like MongoDB Atlas
+2. Add your MongoDB connection string to the `mongoURI` variable in `.env`
+
+### Dashboard Setup (Optional)
+
+To use the web dashboard:
+
+1. In the Discord Developer Portal, go to OAuth2 settings
+2. Add `http://localhost:3000/auth/redirect` to your redirect URIs
+3. Copy your client secret and add it to the `.env` file
+4. The dashboard will be available at `http://localhost:3000/auth/login`
+
+### Bot Permissions
+
+When inviting your bot to a server, make sure it has the following permissions:
+- Send Messages
+- Use Slash Commands
+- Read Message History
+- Embed Links
+
+## Features
+
+- **Slash Commands**: Modern Discord slash command support
+- **Command Cooldowns**: Prevent command spam (requires MongoDB)
+- **Web Dashboard**: Manage your bot through a web interface
+- **Error Handling**: Robust error handling and anti-crash system
+- **Modular Structure**: Easy to extend with new commands and events
+
+> If you reached this point don't forget to 🌟 this project
