@@ -24,7 +24,7 @@ require('./src/Structure/Handler/Event')(bot);
 require('./src/Structure/Handler/Command')(bot);
 
 // Only start dashboard if we have the required config
-if (bot.config.clientSecret && bot.config.clientSecret !== '') {
+if (bot.config.clientSecret && bot.config.clientSecret !== 'YOUR_CLIENT_SECRET_HERE') {
   require('./src/Dashboard/server.js');
 } else {
   console.warn('Dashboard disabled: clientSecret not provided');
